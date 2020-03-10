@@ -19,7 +19,7 @@ const app = express();
 app.use(fileUpload());
 var debug = require('debug');
 var http = require('http').Server(app);
-const port = process.env.PORT || '6000';
+const port = process.env.PORT || '4200';
 
 var io = require('socket.io')(http);
 
