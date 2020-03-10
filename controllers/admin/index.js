@@ -193,11 +193,11 @@ exports.sudo_page = function(req, res) {
 
 exports.manage_roles = function(req, res) {
     let action_type="change_default_settings";
-    if(!req.session.hasOwnProperty("user_id")){
-        // console.log("its working", req.session.user_id)
-        res.redirect('/admin_fg_dashboard_brf/login')
-    }
-    else if(req.session.hasOwnProperty("user_id")){
+    // if(!req.session.hasOwnProperty("user_id")){
+    //     // console.log("its working", req.session.user_id)
+    //     res.redirect('/admin_fg_dashboard_brf/login')
+    // }
+    // else if(req.session.hasOwnProperty("user_id")){
     Role.find({}, function(err, roles){
         if(roles.length===0){
             console.log("There is no roles created yet, so lets create em")
@@ -297,7 +297,7 @@ exports.manage_roles = function(req, res) {
         }
     })
 }
-}
+// }
 
 exports.home = function(req, res) {    
     if(!req.session.hasOwnProperty("user_id")){
@@ -626,26 +626,26 @@ exports.single_candidate_page = function(req, res){
 
 exports.register_user_post = function(req, res) {
     
-    if(!req.session.hasOwnProperty("user_id")){
-        // console.log("its working", req.session.user_id)
-        res.redirect('/admin_fg_dashboard_brf/login')
-    }
-    else if(req.session.hasOwnProperty("user_id")){
-        let action_type = "create_a_user";
-        let decrypted_user_id = decrypt(req.session.user_id, req, res)
-        let decrypted_user_role = decrypt(req.session.role, req, res)
-        const getUser = findResource({role_id: decrypted_user_role})
-        getUser.then(function(permissions){
-        let my_permissions = []
-        for(var i in permissions){
-            // console.log(permissions[i].resource_name)
-            if(permissions[i].status === true){
-                my_permissions.push(permissions[i].resource_name)
-            }               
-        }
-        console.log(my_permissions)
-        let permission = my_permissions.includes(action_type);           
-        if(permission===true){    
+    // if(!req.session.hasOwnProperty("user_id")){
+    //     // console.log("its working", req.session.user_id)
+    //     res.redirect('/admin_fg_dashboard_brf/login')
+    // }
+    // else if(req.session.hasOwnProperty("user_id")){
+    //     let action_type = "create_a_user";
+    //     let decrypted_user_id = decrypt(req.session.user_id, req, res)
+    //     let decrypted_user_role = decrypt(req.session.role, req, res)
+    //     const getUser = findResource({role_id: decrypted_user_role})
+    //     getUser.then(function(permissions){
+    //     let my_permissions = []
+    //     for(var i in permissions){
+    //         // console.log(permissions[i].resource_name)
+    //         if(permissions[i].status === true){
+    //             my_permissions.push(permissions[i].resource_name)
+    //         }               
+    //     }
+    //     console.log(my_permissions)
+    //     let permission = my_permissions.includes(action_type);           
+    //     if(permission===true){    
         let incoming_file_name = filePlacerAndNamer(req, res, req.files.photo);
         User.findOne({email: req.body.email}, function(err, email_registered){
             if (email_registered==null) { 
@@ -681,12 +681,12 @@ exports.register_user_post = function(req, res) {
             }
      })
     }
-    else{
-        res.redirect('/error_403')
-    }
-})
-}
-}
+    // else{
+    //     res.redirect('/error_403')
+    // }
+// })
+// }
+// }
 
 exports.register_super_post = function(req, res) {
     let incoming_file_name = filePlacerAndNamer(req, res, req.files.photo);
