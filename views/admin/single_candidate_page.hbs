@@ -1,0 +1,183 @@
+
+            <!-- ============================================================== -->
+            <!-- Container fluid scss in scafholding.scss -->
+            <!-- ============================================================== -->
+<div class="container-fluid">
+{{!-- role_id: String,
+    state_of_origin: String,
+    dob: String,
+    dog: String,
+    gender: String,
+    lga: String,
+    state_residence: String,
+    geopolitical_zone: String,
+    year_of_graduation: String,
+    school_of_study: String,
+    photo: String, --}}
+                <div class="row">
+                    <div class="col s4">
+                        <div class="card">
+                            <img class="responsive-img" src="/admin/assets/images/big/socialbg.jpg" height="456" alt="Card image">
+                            <div class="card-img-overlay white-text social-profile d-flex justify-content-center">
+                                <div class="align-self-center">
+                                    <img src="/uploads/{{data.profile.photo}}" class="circle" width="200">
+                                    <h4 class="card-title white-text">{{{jsonp data.profile.user}}}</h4>
+                                    <p class="white-text">{{data.profile.about_yourself}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-content">
+                                <small>State of Origin/Geopolitical Zone</small>
+                                <h6>{{data.profile.state_of_origin}} / {{data.profile.geopolitical_zone}}</h6>
+                                <small>Year of NYSC completion</small>
+                                <h6>{{data.profile.dog}}</h6>
+                                <small>Course of Study</small>
+                                <h6>{{data.profile.course_study}}</h6>
+                                <small>Institution Attended</small>
+                                <h6>{{data.profile.school_of_study}}</h6>
+                                <h6>{{data.profile.grade_of_school}}</h6>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="col s8">
+                        <div class="card">
+                            <div class="row">
+                                <div class="col s12">
+                                    <ul class="tabs">
+                                        <li class="tab col s4"><a href="#timeline">Candidate Remarks</a></li>
+                                        <li class="tab col s4"><a href="#profile">Candidate Profile</a></li>
+                                        <li class="tab col s4"><a href="#settings">Analysis</a></li>
+                                    </ul>
+                                </div>
+<div id="timeline" class="col s12">
+    <div class="card-content">
+        <div class="profiletimeline">          
+            {{#each data.comment}}
+            <div class="sl-item">
+                <div class="sl-left"> <img src="/uploads/{{{pix_getter this.commenter}}}" alt="user" class="circle" /> </div>
+                <div class="sl-right">
+                    <div><a href="javascript:void(0)" class="">{{{jsonp this.commenter}}}</a> <span class="sl-date">{{{ago_time this.createdAt}}}</span>
+                        <p class="m-t-10">{{this.message}}</p>
+                    </div>
+                </div>
+            </div>            
+            <hr>
+            {{/each}}
+            
+        </div>
+    </div>
+</div>
+
+
+                                <div id="profile" class="col s12">
+                                    <div class="card-content">
+                                        <div class="row">
+                                            <div class="col m3 b-r"> <strong>Full Name</strong>
+                                                <br>
+                                                <p>{{{jsonp data.profile.user}}}</p>
+                                            </div>
+                                            <div class="col m3 b-r"> <strong>Age</strong>
+                                                <br>
+                                                <p>{{{dob_calc data.profile.dob}}} Years</p>
+                                            </div>
+                                            <div class="col m3 b-r"> <strong>State of Origin</strong>
+                                                <br>
+                                                <p>{{data.profile.state_of_origin}}</p>
+                                            </div>
+                                            <div class="col m3"> <strong>Location</strong>
+                                                <br>
+                                                <p>{{data.profile.state_residence}}</p>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                         <small>About the Candidate</small>
+                                        <p class="m-t-30" style="margin-top:1px!important;">{{data.profile.about_yourself}}</p>
+                                        <hr>
+                                         <small>Candidate's Say on "Why I am the best for BRF"</small>
+                                        <p class="m-t-30" style="margin-top:1px!important;">{{data.profile.best_for_brf}}</p>
+                                         <hr>
+                                         <small>Work Experience</small>
+                                        <p class="m-t-30" style="margin-top:1px!important;">{{data.profile.work_experience}}</p>
+                                        <hr>
+
+                                        <h5 class="card-title">Candidate Analysis</h5>
+                                        <hr>
+                                         <h6 class="font-light m-t-30">IQ Test Score<span class="pull-right">({{{approximator_percentager data.profile.iq_test_score}}}%)</span></h6>
+                                        <div class="progress">
+                                            <div class="determinate" style="width: {{data.profile.iq_test_score}}%"></div>
+                                        </div>
+                                        <h6 class="font-light m-t-30">Use of IT Score <span class="pull-right">({{{approximator_percentager data.profile.use_of_it_score}}}%)</span></h6>
+                                        <div class="progress">
+                                            <div class="determinate" style="width: {{data.profile.use_of_it_score}}%"></div>
+                                        </div>
+                                        {{#each data.profile.personality}}
+                                        <h6 class="font-light m-t-30">{{{underscore_formatter this.name}}} <span class="pull-right">({{{approximator_percentager this.score}}}%)</span></h6>
+                                        <div class="progress">
+                                            <div class="determinate" style="width: {{this.score}}%"></div>
+                                        </div>
+                                        {{/each}}
+                                        <a href="/add_to_finalist/{{data.profile.id}}">Add To Finalist</a>
+                                        
+                                    </div>
+                                </div>
+                                
+                               <script>
+                                   window.onload = function() {
+  document.getElementById('settings').style.display = 'none';
+};
+                               </script>
+                                <div id="settings" class="col s12">
+                                    <div class="card-content">
+                                        <div class="row">
+                                     {{!-- <div class="col s12">
+                                        <div class="card">
+                                            <div class="card-content">
+                                                <h5 class="card-title">Descriptive Analysis Based on User <Datal></Datal></h5>
+                                                <div class="ct-bar-chart" style="height: 200px;"></div>
+                                            </div>
+                                        </div>
+                                    </div> --}}
+
+                                    <div class="col s12">
+                                        <div class="card">
+                                            <div class="card-content">
+                                                <h6 class="card-title">Predictive Analysis of Candidate Efficiency Using Random Forest and Naive Bayes Algorithm</h6>
+                                                <div class="ct-area-ln-chart" style="height: 200px;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                   
+                                    <div class="card-content">
+                                        <h5>Enter Your Own personal Remark about this Candidate</h5>
+                                        <form action="/comment_on_candidate/{{data.profile.id}}" method="POST">
+                                          
+                                  
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <textarea name="message" id="message" class="materialize-textarea"></textarea>
+                                                    <label for="message">Remark</label>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <button class="btn teal waves-effect waves-light" type="submit" >Submit Remark</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                         </div>
+                        </div>
+                    </div>
+                </div>
+               <!-- ============================================================== -->
+
+</div>
+
+
+

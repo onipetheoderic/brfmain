@@ -1,0 +1,354 @@
+<div class="card info-gradient m-t-0 m-b-0">
+                <div class="card-content">
+                    <div class="p-b-40 p-t-20">
+                        <h3 class="white-text">Welcome back Steve!</h3>
+                        <p class="white-text op-7 m-b-20">Welcome to your Dashboard!!!</p>
+                    </div>
+                </div>
+            </div>
+<div class="container-fluid">
+    <div class="row">
+        <!-- col -->
+        <div class="col s12 l7">
+            <div class="card">
+                <div class="card-content">
+                    <h5 class="card-title">Number of Registered Candidates Across the Six Geopolitical Zones</h5>
+                    <div class="net-income m-t-30" style="height:557px; position: relative;"></div>
+                    <ul class="list-inline center-align">
+                        <li><i class="fa fa-circle blue-text text-accent-4"></i>Total Number of Candidate</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" id="all_zone" value="{{data.north_central}}-{{data.north_west}}-{{data.north_east}}-{{data.south_south}}-{{data.south_east}}-{{data.south_west}}">
+         <input type="hidden" id="all_genders" value="{{data.shortlisted_gender.male}}-{{data.shortlisted_gender.female}}">
+        
+{{!-- <script>
+    
+    let all_genders = document.getElementById("all_genders").value;
+ 
+</script> --}}
+
+                    <div class="col s12 l5">
+                        <div class="row">
+                            <div class="col s12 m6 l6">
+                                <div class="card warning-gradient card-hover">
+                                    <div class="card-content">
+                                        <a href="/admin_fg_dashboard_brf/shortlisted_candidate"><h5 class="card-title  white-text">Shortlisted Candidate</h5></a>
+                                        <p class="m-b-5"><span style="color:white">Male <span class="right">{{data.shortlisted_gender.male}}</span></span></p>
+                                        <p><span style="color:white">Female <span class="right">{{data.shortlisted_gender.female}}</span></span></p>
+                                        <p><span style="color:white">Total <span class="right"><strong style="font-size:18px; color:white">{{data.shortlisted_gender.total_gender}}</strong></span></span></p>
+                                        
+                                    </div>
+                                    <div id="revenue" style="height:75px; width:100%;"></div>
+                                </div>
+                            </div>
+                            <div class="col s12 m6 l6">
+                                <div class="card primary-gradient card-hover">
+                                    <div class="card-content">
+                                        <h5 class="card-title white-text">Applicants</h5>
+                                        <p class="m-b-5"><span style="color:white">Male<span class="right">{{data.male}}</span></span></p>
+                                        <p><span style="color:white">Female<span class="right">{{data.female}}</span></span></p>
+                                        <p><span style="color:white">Total<span class="right"><strong style="font-size:18px;">{{data.total_gender}}</strong></span></span></p>
+                                    </div>
+                                    <div class="center-align">
+                                        <div id="visits"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- North-Central, North-West, North-East, South-South, South-East and South-West.  -->
+                            <div class="col s12 m6 l6">
+                                <div class="card primary-gradient card-hover">
+                                    <div class="card-content">
+                                        <h5 class="card-title white-text">Applicants (6) Geopolitical Zones</h5>
+                                        <p class="m-b-5"><span style="color:white">North-Central<span class="right">{{data.north_central}}</span></span></p>
+                                        <p><span style="color:white">North-West<span class="right">{{data.north_west}}</span></span></p>
+                                        <p class="m-b-5"><span style="color:white">North-East<span class="right">{{data.north_east}}</span></span></p>
+                                        <p><span style="color:white">South-South<span class="right">{{data.south_south}}</span></span></p>
+                                        <p class="m-b-5"><span style="color:white">South-East<span class="right">{{data.south_east}}</span></span></p>
+                                        <p><span style="color:white">South-West<span class="right">{{data.south_west}}</span></span></p>
+                                        <p><span style="color:white">Total<span class="right"><strong style="font-size:18px;">{{data.total}}</strong></span></span></p>
+
+                                    </div>
+                                    <div class="center-align">
+                                        <div id="visits"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m6 l6">
+                                <div class="card primary-gradient card-hover">
+                                    <div class="card-content">
+                                        <h5 class="card-title white-text">Selected Applicants (6) Geopolitical Zones</h5>
+                                        <p class="m-b-5"><span style="color:white">North-Central<span class="right">{{data.shortlisted_candidate_geozone.north_central}}</span></span></p>
+                                        <p><span style="color:white">North-West<span class="right">{{data.shortlisted_candidate_geozone.north_central}}</span></span></p>
+                                        <p class="m-b-5"><span style="color:white">North-East<span class="right">{{data.shortlisted_candidate_geozone.north_east}}</span></span></p>
+                                        <p><span style="color:white">South-South<span class="right">{{data.shortlisted_candidate_geozone.south_south}}</span></span></p>
+                                        <p class="m-b-5"><span style="color:white">South-East<span class="right">{{data.shortlisted_candidate_geozone.south_east}}</span></span></p>
+                                        <p><span style="color:white">South-West<span class="right">{{data.shortlisted_candidate_geozone.south_west}}</span></span></p>
+                                        <p><span style="color:white">Total<span class="right"><strong style="font-size:18px;">{{data.shortlisted_candidate_geozone.total}}</strong></span></span></p>
+                                    </div>
+                                    <div class="center-align">
+                                        <div id="visits"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{#if data.isSuperAdmin}}
+                            <div class="col s12 m6 l6">
+                                <div class="card success-gradient card-hover">
+                                    <div class="card-content">
+                                        <h5 class="card-title  white-text">SUDO</h5>
+                                        <ul class="m-t-15">
+                                            <li>
+                                                <div class="d-flex no-block align-items-center">
+                                                    <div>
+                                                        <a href="/admin_fg_dashboard_brf/sudo_page"><span style="color:white">Sudo Page</span></a>
+                                                    </div>
+                                                    
+                                                   
+                                                </div>
+                                               
+                                            </li>
+                                            <li>
+                                                <div class="d-flex no-block align-items-center">
+                                                    <div>
+                                                        <span style="color:white">About Page Modification</span>
+                                                    </div>
+                                                    
+                                                   
+                                                </div>
+                                               
+                                            </li>
+                                            <li>
+                                                <div class="d-flex no-block align-items-center">
+                                                    <div>
+                                                        <span style="color:white">Announcement Page</span>
+                                                    </div>
+                                                    
+                                                   
+                                                </div>
+                                               
+                                            </li>
+                                            <li>
+                                                <div class="d-flex no-block align-items-center">
+                                                    <div>
+                                                        <span style="color:white">Carousel Texts</span>
+                                                    </div>
+                                                    
+                                                   
+                                                </div>
+                                               
+                                            </li>
+                                            <li>
+                                                <div class="d-flex no-block align-items-center">
+                                                    <div>
+                                                        <span style="color:white">Contact Details</span>
+                                                    </div>
+                                                    
+                                                   
+                                                </div>
+                                               
+                                            </li>
+                                            
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            {{/if}}
+                            <div class="col s12 m6 l6">
+                                <div class="card success-gradient card-hover">
+                                    <div class="card-content">
+                                        <h5 class="card-title  white-text">Messages</h5>
+                                        <ul class="m-t-15">
+                                            <li>
+                                                <div class="d-flex no-block align-items-center">
+                                                    <div>
+                                                        <span style="color:white; font-size:10px;">BroadCast message to Staffs</span>
+                                                    </div>
+                                                    
+                                                </div>
+                                                
+                                            </li>
+                                            <li>
+                                                <div class="d-flex no-block align-items-center">
+                                                    <div>
+                                                        <span style="color:white; font-size:10px;">Broadcast message to Candidates</span>
+                                                    </div>
+                                                    
+                                                </div>
+                                              
+                                            </li>
+                                            <li>
+                                                <div class="d-flex no-block align-items-center">
+                                                    <div>
+                                                        <span style="color:white; font-size:10px;">Broadcast message to Non-selected Candidates</span>
+                                                    </div>
+                                                    
+                                                </div>
+                                              
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                           
+                            
+                        </div>
+                    </div>  
+                    
+                    
+              
+                    <!-- col -->
+
+                </div>
+                <!-- ============================================================== -->
+                <!-- Table -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <!-- col -->
+                    <div class="col s12">
+                        <div class="card">
+                            <div class="card-content">
+                                <!-- title -->
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        <h5 class="card-title">List of All Eligible Candidates</h5>
+                                        <h6 class="card-subtitle">First Batch</h6>
+                                    </div>
+                             
+                                </div>
+                                <!-- title -->
+                                <div class="table-responsive">
+                                    <table class="">
+                                        <thead>
+                                            <tr>
+                                                <th>full Name</th>
+                                               
+                                                <th>Geopolitical Zone</th>
+                                                <th>State of Origin</th>
+                                                <th>IQ Test Score</th>
+                                                <th>Use of IT Score</th>
+                                                <th>Course of Study</th>
+                                               
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {{#each data.shortlisted}}
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex no-block align-items-center">
+                                                        <div class="m-r-10"><img src="/uploads/{{this.photo}}" alt="user" class="circle" width="45" /></div>
+                                                        <div class="">
+                                                       <a href="/single_candidate_page/{{this.id}}"> <h5 class="m-b-0 font-16 font-medium">{{{jsonp this.user}}}</h5><span></a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                   {{{underscore_formatter this.geopolitical_zone}}}
+                                                </td>
+                                                <td>{{this.state_of_origin}}</td>
+                                                <td>{{{approximator this.iq_test_score}}}/100</td>
+                                                <td>{{{approximator this.use_of_it_score}}}/100</td>
+                                                <td class="blue-grey-text  text-darken-4 font-medium">{{this.course_study}}</td>
+                                            </tr>
+                                            {{/each}}
+                                        
+                                       
+                                       
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="col s12">
+                        <div class="card">
+                            <div class="card-content">
+                                <!-- title -->
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        <h5 class="card-title">Finalist Selected</h5>
+                                        <h6 class="card-subtitle">First Batch</h6>
+                                    </div>
+                             
+                                </div>
+                                <!-- title -->
+                                <div class="table-responsive">
+                                    <table class="">
+                                        <thead>
+                                            <tr>
+                                                <th>full Name</th>
+                                               
+                                                <th>Geopolitical Zone</th>
+                                                <th>State of Origin</th>
+                                                
+                                                <th>Course of Study</th>
+                                               
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {{#each data.finalist}}
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex no-block align-items-center">
+                                                        <div class="m-r-10"><img src="/uploads/{{{finalist_img this.profile}}}" alt="user" class="circle" width="45" /></div>
+                                                        <div class="">
+                                                         <a href="/single_candidate_page/{{{finalist_id this.profile}}}"> <h5 class="m-b-0 font-16 font-medium">{{{finalist_fullname this.profile}}}</h5><span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                  {{{finalist_geozone this.profile}}}
+                                                </td>
+                                                <td>{{{finalist_state this.profile}}}</td>
+                                                <td>{{{finalist_course this.profile}}}</td>
+                                              
+                                            </tr>
+                                            {{/each}}
+                                        
+                                       
+                                       
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- Devices - Income - Sales -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <!-- col -->
+                    <div class="col s12 l6">
+                        <div class="card">
+                            <div class="card-content">
+                                <h5 class="card-title">Gender of ShortListed Candidates</h5>
+                                <div id="visitor" style="height:267px; width:100%;" class="m-t-20"></div>
+                                <ul class="list-inline center-align">
+                                    <li><i class="fa fa-circle blue-text"></i> Male</li>
+                                    <li><i class="fa fa-circle blue-text text-accent-4"></i> Female</li>
+                                 
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- col -->
+                    <div class="col s12 l6">
+                        <div class="card">
+                            <div class="card-content">
+                                <h5 class="card-title">Candidates Performance Across the 6 Geopolitical Zones</h5>
+                                <div id="visitor2" style="height:267px; width:100%;" class="m-t-20"></div>
+                                <ul class="list-inline center-align">
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <!-- ============================================================== -->
+                <!-- Projects of the month -->
+                <!-- ============================================================== -->
+</div>
+
